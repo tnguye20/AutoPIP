@@ -1,0 +1,17 @@
+{
+  "name": "Auto Picture-in-Picture",
+  "version": "1.0",
+  "description": "Automatically enable Picture-in-Picture mode for playing videos when the tab is unfocused.",
+  "manifest_version": 3,
+  "permissions": ["activeTab", "tabs"],
+  "background": {
+    "service_worker": "background.js"
+  },
+  "content_scripts": [
+    {
+      "matches": ["http://*/*", "https://*/*"],
+      "js": ["content.js"],
+      "run_at": "document_end"
+    }
+  ]
+}
