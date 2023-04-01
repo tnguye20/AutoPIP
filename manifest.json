@@ -22,6 +22,13 @@
       "description": "Toggle mute of PIP tab",
       "global": true
     },
+    "playpause_pip": {
+      "suggested_key": {
+        "default": "Ctrl+Shift+P"
+      },
+      "description": "Play/Pause current PIP",
+      "global": true
+    },
     "exit_pip": {
       "suggested_key": {
         "default": "Ctrl+Shift+O"
@@ -36,5 +43,6 @@
       "js": ["content.js"],
       "run_at": "document_end"
     }
-  ]
+  ],
+  "key": "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAh+7mqGdsKMmmafxkMGFuIBuN1pmz8TdNb4nqLg2Xt7GBdGW3e4TeQAgkxYWzmqjHC7gLvHB21LuNW+d2V29nj+c1JB1ZdrMNHfeDAZ3+WjDYeJliNyx/+JFOxHpeGMui3QHiGRrX7JYhCo7DCmCn2RYEe05T1HYwlgdC1NVNmP3XRwNfQFyOWyOTfS3+dIonsc3FBw/RWEcP4jzVLWrIkjQXIfOgUihReCIEOEfdrmpwNdDXYTCq8YsfQYPIc0K3mjevLlFl3cVd13Rjb2vpy8hukfs7LuuwPbCrChDFSd12fcfVauuhcspBvpEDuvLIbM8ZDHo7ujYIOTc3tAk2fQIDAQAB"
 }

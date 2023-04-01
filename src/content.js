@@ -13,33 +13,34 @@ if (document.pictureInPictureEnabled) {
       request.type +
       "\n";
     logger(msg);
-
-    let videos = document.querySelectorAll("video");
-    videos = Array.from(videos).filter((video) => video.paused === false);
-
     try {
+      let videos = document.querySelectorAll("video");
+      videos = Array.from(videos).filter((video) => video.paused === false);
+      const video = videos.length >= 1 ? videos[0] : null;
+      if (video === null) {
+      }
+
       switch (request.type) {
+        case "PLAYPAUSE_PIP": {
+          document.pictureInPictureElement.click();
+        }
         case "ENTER_PIP": {
-          if (videos.length > 0) {
-            const video = videos[0];
+          const video = videos[0];
 
-            video.addEventListener("leavepictureinpicture", async () => {
-              await chrome.storage.local.remove(AUTOPIP_STORAGE_TABID);
-            });
+          video.addEventListener("leavepictureinpicture", async () => {
+            await chrome.storage.local.remove(AUTOPIP_STORAGE_TABID);
+          });
 
-            if (request.active && video === document.pictureInPictureElement) {
-              await document.exitPictureInPicture();
-              await chrome.storage.local.remove(AUTOPIP_STORAGE_TABID);
-              msg += "Requested exit PIP in " + request.tabId;
-            } else {
-              await video.requestPictureInPicture();
-              await chrome.storage.local.set({
-                [AUTOPIP_STORAGE_TABID]: request.tabId,
-              });
-              msg += "Requested PIP in " + request.tabId;
-            }
+          if (request.active && video === document.pictureInPictureElement) {
+            await document.exitPictureInPicture();
+            await chrome.storage.local.remove(AUTOPIP_STORAGE_TABID);
+            msg += "Requested exit PIP in " + request.tabId;
           } else {
-            msg += "No video element in tab " + request.tabId;
+            await video.requestPictureInPicture();
+            await chrome.storage.local.set({
+              [AUTOPIP_STORAGE_TABID]: request.tabId,
+            });
+            msg += "Requested PIP in " + request.tabId;
           }
           break;
         }
@@ -54,8 +55,10 @@ if (document.pictureInPictureEnabled) {
       }
     } catch (err) {
       logger(err);
+      sendResponse({ msg });
+    } finally {
+      sendResponse({ msg });
     }
-    sendResponse({ msg });
   });
 } else {
   alert(
