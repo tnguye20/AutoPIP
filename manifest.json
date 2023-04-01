@@ -3,9 +3,35 @@
   "version": "1.0",
   "description": "Automatically enable Picture-in-Picture mode for playing videos when the tab is unfocused.",
   "manifest_version": 3,
-  "permissions": ["activeTab", "tabs", "storage"],
+  "permissions": ["activeTab", "tabs", "storage", "commands"],
   "background": {
     "service_worker": "background.js"
+  },
+  "commands": {
+    "to_audio_tab": {
+      "suggested_key": {
+        "default": "Ctrl+G",
+        "mac": "Command+G"
+      },
+      "description": "Move focus to tab with audio playing.",
+      "global": true
+    },
+    "mute_pip": {
+      "suggested_key": {
+        "default": "Ctrl+Shift+M",
+        "mac": "Command+Shift+M"
+      },
+      "description": "Toggle mute of PIP tab.",
+      "global": true
+    },
+    "exit_pip": {
+      "suggested_key": {
+        "default": "Ctrl+Shift+O",
+        "mac": "Command+Shift+O"
+      },
+      "description": "Close PIP window, but keep audio playing.",
+      "global": true
+    }
   },
   "content_scripts": [
     {

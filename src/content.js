@@ -1,3 +1,5 @@
+var console = {};
+console.log = function () {};
 const AUTOPIP_STORAGE_TABID = "autoPip_tabID";
 
 const logger = (l) => {
